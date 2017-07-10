@@ -1,0 +1,25 @@
+﻿@model ListListDev.Models.CreateListHeaderViewModel
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Create New List</h4>
+</div>
+<div class="modal-body clearfix">
+    @using (Html.BeginForm("CreateListHeader", "List", FormMethod.Post, new { role = "form" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = "Enter List Name..." })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="pull-right">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <input type="submit" value="Create List" class="btn btn-primary" />
+        </div>
+    }
+</div>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

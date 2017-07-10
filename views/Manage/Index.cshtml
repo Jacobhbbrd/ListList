@@ -1,0 +1,19 @@
+﻿@model ListListDev.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr/>
+
+<div>
+    @if (!String.IsNullOrEmpty(ViewBag.StatusMessage))
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @ViewBag.StatusMessage
+        </div>
+    }
+    @Html.ActionLink("Change your password", "ChangePassword", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Return To Dashboard", "Dashboard", "List", null, new { @class = "btn btn-primary" })
+</div>

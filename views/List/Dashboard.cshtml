@@ -1,0 +1,118 @@
+﻿@model ListListDev.Models.DashboardViewModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    AjaxOptions AjaxOptions = new AjaxOptions()
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "ajaxDiv",
+        InsertionMode = InsertionMode.Replace,
+        OnComplete = "showAjaxModal"
+    };
+}
+
+<div class="row">
+    <div class="col-md-12" align="center">
+        <div align="left" id="dashboard">
+            @if (Model.Lists.Count().Equals(0))
+            {
+                <div class="alert alert-info" role="alert" align="center">
+                    You have no lists yet. Click the "Create New List" button to start!
+                </div>
+            }
+            else
+            {
+                foreach (var list in Model.Lists)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading clearfix">
+                            <div class="pull-right">
+                                @Ajax.ActionLink("Add List Item",
+                                                 "CreateListItemPartial", 
+                                                 new { list.ID }, AjaxOptions, 
+                                                 new { @class = "btn btn-primary btn-sm" })
+                                <button type="button" class="btn btn-danger btn-sm" 
+                                        data-toggle="modal" data-target="#deleteModal" 
+                                        onclick="deleteListHeader('@list.ID', '@list.Title');">
+                                    Delete List
+                                </button>
+                            </div>
+                            <h3 class="panel-title" style="padding-top: 7px;">
+                                @list.Title 
+                                <span style="font-size: 12px;">
+                                    @Ajax.ActionLink(" ", "EditListHeaderPartial",
+                                                    new { list.ID }, AjaxOptions,
+                                                    new { @class = "glyphicon glyphicon-edit",
+                                                          @style = "text-decoration: none;",
+                                                          @title = "Edit List Name" })
+                                </span>
+                            </h3> 
+                        </div>
+                        <div class="panel-body">
+                            @if (list.ListItems.Count().Equals(0))
+                            {
+                                <div class="alert alert-info" role="alert" style="margin: 0;">
+                                    There are no items in this list.
+                                </div>
+                            }
+                            else
+                            {
+                                <ul class="list-group" style="margin-bottom: 0px;">
+                                    @foreach (var listItem in list.ListItems)
+                                    {
+                                        <li class="list-group-item clearfix">
+                                            <div class="btn-group pull-right" role="group">
+                                                <a class="btn btn-default btn-sm "
+                                                    data-ajax="true" data-ajax-complete="showAjaxModal"
+                                                    data-ajax-method="GET" data-ajax-mode="replace" data-ajax-update="#ajaxDiv"
+                                                    href="/List/EditListItemPartial/@listItem.ID" type="button">
+                                                    <i class="glyphicon glyphicon-edit"></i>
+                                                </a>
+                                                <button type="button" class="btn btn-danger btn-sm" 
+                                                        data-toggle="modal" data-target="#deleteModal" 
+                                                        onclick="deleteListItem('@listItem.ID', '@listItem.Text');">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </div>
+                                            <h5 style="padding-top: 7.5px; margin: 0;">@listItem.Text</h5>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            @Ajax.ActionLink("Create New List", "CreateListHeaderPartial", null, AjaxOptions, new { @class = "btn btn-primary pull-right" })
+        </div>
+    </div>
+</div>
+
+  <!-- Delete Confirmation Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog custom-modal-size" role="dialog">
+        <div class="modal-content">
+            <div class="modal-body" id="deleteModalBody">
+                <p id="deleteWarning"></p>
+            </div>
+            <div class="modal-footer" id="deleteModalFooter">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a href="#" class="btn btn-danger" id="delBtn">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create/Edit List Item and List Header Modal -->
+<div class="modal fade" id="ajaxModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog custom-modal-size" role="form">
+        <div class="modal-content">
+            <div id="ajaxDiv"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/dashboard")
+}

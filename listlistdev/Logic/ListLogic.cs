@@ -14,14 +14,10 @@ namespace ListListDev.Logic
         // Create connection to the list database
         private ListListContext listDb;
 
-        // Create connection to the user database
-        private ApplicationDbContext userDb;
-
 
         // Initialize database connections
         public ListLogic()
         {
-            userDb = new ApplicationDbContext();
             listDb = new ListListContext();
         }
 
@@ -433,7 +429,6 @@ namespace ListListDev.Logic
         public void Dispose()
         {
             listDb.Dispose();
-            userDb.Dispose();
         }
     }
 

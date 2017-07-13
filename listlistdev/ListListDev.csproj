@@ -196,6 +196,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\ListLogic.cs" />
     <Compile Include="Migrations\201706300309511_InitialCreate.cs" />
     <Compile Include="Migrations\201706300309511_InitialCreate.Designer.cs">
       <DependentUpon>201706300309511_InitialCreate.cs</DependentUpon>
@@ -205,19 +206,15 @@
       <DependentUpon>201706301650273_AddUserSupport.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CreateListHeaderViewModel.cs" />
-    <Compile Include="Models\CreateListItemViewModel.cs" />
-    <Compile Include="Models\DashboardViewModel.cs" />
-    <Compile Include="Models\EditListHeaderViewModel.cs" />
-    <Compile Include="Models\EditListItemViewModel.cs" />
-    <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ListHeader.cs" />
     <Compile Include="Models\ListItem.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\ErrorViewModel.cs" />
+    <Compile Include="ViewModels\ListViewModels.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -310,7 +307,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55385</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

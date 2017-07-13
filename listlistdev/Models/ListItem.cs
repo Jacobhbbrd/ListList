@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ListListDev.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using ListListDev.Models;
+using ListListDev.ViewModels;
 
 namespace ListListDev.Models
 {
@@ -21,6 +22,13 @@ namespace ListListDev.Models
 
         public ListItem(CreateListItemViewModel model)
         {
+            this.ListHeaderID = model.ListHeaderID;
+            this.Text = model.Text;
+        }
+
+        public ListItem(EditListItemViewModel model)
+        {
+            this.ID = model.ID;
             this.ListHeaderID = model.ListHeaderID;
             this.Text = model.Text;
         }

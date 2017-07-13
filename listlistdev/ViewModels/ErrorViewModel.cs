@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ListListDev.Models
+namespace ListListDev.ViewModels
 {
     public class ErrorViewModel
     {
